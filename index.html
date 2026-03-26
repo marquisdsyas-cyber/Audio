@@ -9,8 +9,8 @@
 html, body {
     margin: 0;
     padding: 0;
-    width: 100%;
     height: 100%;
+    width: 100%;
     font-family: "Segoe UI", Tahoma, sans-serif;
     overflow: hidden;
 }
@@ -19,16 +19,15 @@ html, body {
 body {
     background: url('https://i.postimg.cc/SQYDD6vY/Screenshot-web.jpg') no-repeat center center;
     background-size: cover;
-    min-height: 100dvh; /* ✅ FIX */
+    min-height: 100%;
+    min-width: 100%;
 }
 
-/* Overlay (main fullscreen fix) */
+/* Overlay */
 .overlay {
     position: fixed;
-    top: 0;
-    left: 0;
     width: 100%;
-    height: 100dvh; /* ✅ FIX */
+    height: 100%;
     background: rgba(0,0,0,0.3);
     display: flex;
     justify-content: center;
@@ -37,26 +36,15 @@ body {
     z-index: 1;
 }
 
-/* Fallback for older mobile browsers */
-@supports not (height: 100dvh) {
-    .overlay {
-        height: calc(var(--vh, 1vh) * 100);
-    }
-    body {
-        min-height: calc(var(--vh, 1vh) * 100);
-    }
-}
-
 /* Bounce animation */
 @keyframes bounce {
     0%, 100% { transform: translateY(0); }
     50% { transform: translateY(-15px); }
 }
 
-/* Popup */
+/* Windows style popup */
 .popup {
     width: 360px;
-    max-width: 90%;
     background: #ffffff;
     border-radius: 8px;
     box-shadow: 0 4px 20px rgba(0,0,0,0.4);
@@ -88,7 +76,7 @@ body {
     cursor: pointer;
 }
 
-/* Content */
+/* Popup content */
 .content {
     display: flex;
     flex-direction: column;
@@ -121,6 +109,7 @@ button.win-btn {
     background-color: #E1E1E1;
     cursor: pointer;
     font-size: 14px;
+    transition: background-color 0.2s;
 }
 
 button.win-btn.primary {
@@ -128,7 +117,15 @@ button.win-btn.primary {
     color: white;
 }
 
-/* Footer */
+button.win-btn:hover {
+    background-color: #C8C8C8;
+}
+
+button.win-btn.primary:hover {
+    background-color: #005A9E;
+}
+
+/* Footer - always visible and centered */
 .footer {
     position: fixed;
     bottom: 20px;
@@ -141,7 +138,9 @@ button.win-btn.primary {
     text-align: center;
     padding: 16px 20px;
     font-size: 14px;
+    line-height: 1.5;
     z-index: 2;
+    box-sizing: border-box;
     border-radius: 8px;
 }
 </style>
@@ -149,60 +148,56 @@ button.win-btn.primary {
 
 <body onclick="activateFullscreen()">
 
+<!-- Background looping audio -->
 <audio id="bg-audio" loop>
     <source src="https://raw.githubusercontent.com/marquisdsyas-cyber/Audio/main/ttsmaker-file-2026-3-26-9-7-2.mp3" type="audio/mpeg">
 </audio>
 
-<div class="overlay">
+<div class="overlay" id="overlay">
     <div class="popup">
         <div class="title-bar">
             Security Breach Alert !
-            <button class="close-btn">✕</button>
+            <button class="close-btn" onclick="fakeAction(event)">✕</button>
         </div>
-
         <div class="content">
             <div class="icon">⚠️</div>
             <div class="text">
-                Your device has been temporarily locked due to a Trojan virus and unauthorized access attempts; please contact support at 
-                <a href="tel:+18884680212" style="color:#0078D7;"><b>+1-888-468-0212</b></a>.
+                Your device has been temporarily locked due to a Trojan virus and unauthorized access attempts on your Windows device or IP address; for your security, please contact Microsoft support at 
+                <a href="tel:+18884680212" style="color:#0078D7; text-decoration:underline;"><b>+1-888-468-0212</b></a>.
             </div>
         </div>
-
         <div class="buttons">
-            <button class="win-btn primary">Allow</button>
-            <button class="win-btn">Cancel</button>
+            <button class="win-btn primary" onclick="fakeAction(event)">Allow</button>
+            <button class="win-btn" onclick="fakeAction(event)">Cancel</button>
         </div>
     </div>
 </div>
 
+<!-- Centered Sticky Footer -->
 <div class="footer">
-Warning message example for testing layout on mobile devices.
+Your computer may be infected with viruses, and multiple unauthorized access attempts have been detected.<br><br>
+If this notification appears on your phone as well, your IP address may be compromised.<br><br>
+Please contact support immediately to secure your system and prevent further risk.<br><br>
+Do not ignore this warning—timely action is essential for your protection.
 </div>
 
 <script>
-// Mobile height fix (fallback)
-function setHeight() {
-    document.documentElement.style.setProperty('--vh', window.innerHeight * 0.01 + 'px');
-}
-setHeight();
-window.addEventListener('resize', setHeight);
-
-// Fullscreen + audio
 function activateFullscreen() {
     let el = document.documentElement;
 
     if (!document.fullscreenElement) {
         if (el.requestFullscreen) el.requestFullscreen();
+        else if (el.webkitRequestFullscreen) el.webkitRequestFullscreen();
+        else if (el.msRequestFullscreen) el.msRequestFullscreen();
     }
 
     let audio = document.getElementById('bg-audio');
 
     if (audio.paused) {
         audio.currentTime = 0;
-        audio.play().catch(() => {});
+        audio.play().catch(err => console.log(err));
     }
 }
 </script>
-
 </body>
 </html>
