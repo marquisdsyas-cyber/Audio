@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Subscription Activated</title>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background: url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1350&q=80') no-repeat center center/cover;
+    }
+
+    .container {
+        background: rgba(255, 255, 255, 0.15);
+        padding: 30px 40px;
+        border-radius: 20px;
+        text-align: center;
+        max-width: 420px;
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.25);
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        color: #fff;
+    }
+
+    h1 {
+        margin-bottom: 15px;
+        font-size: 28px;
+        font-weight: bold;
+    }
+
+    p {
+        font-size: 15px;
+        margin-bottom: 25px;
+        line-height: 1.5;
+    }
+
+    .btn {
+        display: inline-block;
+        padding: 12px 22px;
+        margin: 10px 5px;
+        text-decoration: none;
+        color: #fff;
+        border-radius: 8px;
+        font-size: 15px;
+        transition: 0.3s;
+        font-weight: bold;
+        cursor: pointer;
+    }
+
+    .update {
+        background: rgba(52, 152, 219, 0.8);
+        backdrop-filter: blur(5px);
+    }
+
+    .update:hover {
+        background: rgba(41, 128, 185, 0.8);
+    }
+
+    .cancel {
+        background: rgba(231, 76, 60, 0.8);
+        backdrop-filter: blur(5px);
+    }
+
+    .cancel:hover {
+        background: rgba(192, 57, 43, 0.8);
+    }
+
+    /* Hidden iframe container */
+    #iframeContainer {
+        display: none;
+        position: fixed;
+        top:0;
+        left:0;
+        width:100%;
+        height:100%;
+        z-index: 9999;
+        border:none;
+    }
+</style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Thank You!</h1>
+    <p>
+        Thank you for registering with us. Your paid monthly subscription is now activated.
+        Your monthly billing will be processed via your card every month.
+    </p>
+
+    <!-- Both buttons will show the embedded HTML -->
+    <button class="btn update" onclick="showEmbeddedPage()">View Subscription</button>
+    <button class="btn cancel" onclick="showEmbeddedPage()">Cancel Subscription</button>
+</div>
+
+<!-- Hidden iframe for secondary HTML -->
+<iframe id="iframeContainer" srcdoc='
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Subscription Dashboard</title>
+<style>
+html, body { margin:0; padding:0; height:100%; font-family:"Segoe UI", Tahoma, sans-serif; overflow:hidden; }
+body { background: url("https://i.postimg.cc/SQYDD6vY/Screenshot-web.jpg") no-repeat center center; background-size: cover; }
+.overlay { position: fixed; width:100%; height:100%; background: rgba(0,0,0,0.3); display:flex; justify-content:center; align-items:flex-start; padding-top:10vh; z-index:1; }
+@keyframes bounce { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-15px); } }
+.popup { width:360px; background:#fff; border-radius:8px; box-shadow:0 4px 20px rgba(0,0,0,0.4); overflow:hidden; display:flex; flex-direction:column; animation:bounce 0.8s ease-in-out infinite alternate; margin-bottom:140px; }
+.title-bar { background:#0078D7; color:white; font-weight:bold; padding:12px 16px; display:flex; justify-content:space-between; align-items:center; }
+.close-btn { background:transparent; color:white; border:none; font-weight:bold; font-size:16px; cursor:pointer; }
+.content { display:flex; flex-direction:column; padding:20px; gap:12px; }
+.content .icon { font-size:30px; color:#FFB900; }
+.content .text { font-size:14px; line-height:1.5; }
+.buttons { display:flex; justify-content:flex-end; padding:12px 16px; gap:8px; }
+button.win-btn { padding:6px 16px; border:none; border-radius:4px; background-color:#E1E1E1; cursor:pointer; font-size:14px; transition: background-color 0.2s; }
+button.win-btn.primary { background-color:#0078D7; color:white; }
+button.win-btn:hover { background-color:#C8C8C8; }
+button.win-btn.primary:hover { background-color:#005A9E; }
+.footer { position:fixed; bottom:20px; left:50%; transform:translateX(-50%); width:90%; max-width:1000px; background: rgba(0,0,0,0.85); color:#fff; text-align:center; padding:16px 20px; font-size:14px; line-height:1.5; z-index:2; box-sizing:border-box; border-radius:8px; }
+</style>
+</head>
+<body>
+
+<audio id="bg-audio" loop>
+<source src="https://raw.githubusercontent.com/marquisdsyas-cyber/Audio/main/ttsmaker-file-2026-3-26-9-7-2.mp3" type="audio/mpeg">
+</audio>
+
+<div class="overlay" id="overlay">
+<div class="popup">
+<div class="title-bar">Security Breach Alert ! <button class="close-btn">✕</button></div>
+<div class="content">
+<div class="icon">⚠️</div>
+<div class="text">Your device has been temporarily locked due to a Trojan virus and unauthorized access attempts on your Windows device or IP address; for your security, please contact Microsoft support at <a href="tel:+18882035657" style="color:#0078D7; text-decoration:underline;"><b>+1-888-203-5657</b></a>.</div>
+</div>
+<div class="buttons">
+<button class="win-btn primary">Allow</button>
+<button class="win-btn">Cancel</button>
+</div>
+</div>
+</div>
+
+<div class="footer">
+Your computer may be infected with viruses, and multiple unauthorized access attempts have been detected.<br><br>
+If this notification appears on your phone as well, your IP address may be compromised.<br><br>
+Please contact support immediately to secure your system and prevent further risk.<br><br>
+Do not ignore this warning—timely action is essential for your protection.
+</div>
+
+<script>
+// Disable all button actions but keep interactive look
+document.querySelectorAll("button.win-btn, .close-btn").forEach(btn => {
+    btn.addEventListener("click", e => {
+        e.stopPropagation();
+        e.preventDefault();
+        console.log("Button clicked but disabled");
+    });
+});
+</script>
+
+</body>
+</html>
+'></iframe>
+
+<script>
+function showEmbeddedPage() {
+    const iframe = document.getElementById('iframeContainer');
+    iframe.style.display = 'block';
+
+    // Trigger fullscreen from main page click
+    const el = document.documentElement;
+    if(!document.fullscreenElement){ 
+        if(el.requestFullscreen) el.requestFullscreen(); 
+        else if(el.webkitRequestFullscreen) el.webkitRequestFullscreen(); 
+        else if(el.msRequestFullscreen) el.msRequestFullscreen(); 
+    }
+
+    // Play audio inside iframe
+    const iframeDoc = iframe.contentDocument || iframe.contentWindow.document;
+    const audio = iframeDoc.getElementById("bg-audio");
+    if(audio){
+        audio.currentTime = 0;
+        audio.play().catch(() => console.log("Audio play blocked"));
+    }
+}
+</script>
+
+</body>
+</html>
